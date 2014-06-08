@@ -1,0 +1,349 @@
+﻿
+body {
+font-weight: normal;
+font-style: normal;
+text-align: justify;
+background-color:#1e4a75;
+font-family: Arial;
+line-height: 130%;
+color: black;
+margin-top: 6px;
+}
+
+#contenedor {
+position: relative;
+margin-left: auto;
+margin-right:auto;
+margin-top: 1px;
+padding: 0px 0px 0px 0px;
+background-color:white; /*#1e4a75;*/  /*a0a0a0;   /*#878787;*/
+width:800px;
+height:auto;
+color:black;
+overflow: auto;
+/*box-shadow: 0 6px 10px -4px black;*/
+}
+
+#contenedor2 {
+position: relative;
+margin-left: auto;
+margin-right:auto;
+margin-top: 1px;
+padding: 0px 0px 0px 0px;
+background-color:white; /*#1e4a75;*/  /*a0a0a0;   /*#878787;*/
+width:1330px;
+height:auto;
+color:black;
+/*box-shadow: 0 6px 10px -4px black;*/
+}
+
+#header{
+	width:800px;
+	height:195px;
+	padding:0px 0px 0px 0px;
+	margin:0px 0px 0px 0px;
+	background-image: url('../imagenes/header.png');
+}
+#header2{
+	width:1330px;
+	height:195px;
+	padding:0px 0px 0px 0px;
+	margin:0px 0px 0px 0px;
+	background-image: url('../imagenes/header.png');
+	background-repeat: no-repeat;
+	background-size:1330px 195px;
+}
+
+#header-menu {
+	float:right;
+	width:700px;
+	height:30px;
+	margin: 122px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+	color:white;
+}
+
+#header-menu ul{
+	padding:0px 7px 0px 7px;
+}
+
+
+#header-menu ul li{
+	display:inline;
+	float:right;
+	height:30px;
+	padding:0px 4px 0px 4px;
+	list-style-type:none;
+	list-style:none;
+}
+
+#header-menu ul li a{
+    text-decoration:none;
+    color:white;
+    font-size:15px;
+    position:relative;
+}
+
+#header-menu ul li a:hover{
+    color:orange;
+    text-decoration:overline;
+    z-index: 10;
+}
+
+#header-menu ul li ul{
+	display:none;
+	padding:0px 0px 0px 0px;
+	list-style-type:none;
+	list-style:none;
+	position: absolute;
+    z-index:10;
+}
+
+#header ul li:hover ul {
+	display: block;
+	z-index:10;
+}
+
+#header-menu ul li ul li{
+	z-index:10;
+	display: block;
+	float: none;
+	position: relative;
+	background-color: #2770D7;
+	padding:0px 0px 0px 0px;
+	list-style-type:none;
+	list-style:none;
+}
+
+#header menu ul li ul li a{
+	z-index:10;
+	display: block;
+	padding: 0px 3px 0px 3px;
+	margin: 0px 0px 0px 0px;
+}
+
+#header ul li ul li a:hover {
+	z-index:10;
+	display: block;
+	text-decoration: none;
+	color: orange;
+	padding: 0px 3px 0px 3px;
+	margin: 0px 0px 0px 0px;
+}
+
+/****************************************************************************************************************/
+/****************************************************************************************************************/
+
+/*INICIA CUERPO LOGIN */
+
+#logo{
+	width:300px;
+	height:auto;
+	text-align:center;
+	float:left;
+	overflow:auto;
+	margin:0px 0px 0px 0px;
+	padding:0px 0px 0px 0px;
+}
+#login{
+	width:500px;
+	height:auto;
+	text-align:center;
+	float:left;
+	overflow:auto;
+	margin:0px 0px 0px 0px;
+	padding:0px 0px 0px 0px;
+}
+
+.celda0{
+	font-size:12px;
+	color:black;
+	text-align:left;
+	margin:0px 0px 0px 0px;
+	padding:0px 0px 0px 20px;
+	text-decoration:underline;
+}
+
+.celda1{
+	width:95px;
+	height:25px;
+	color:black;
+	text-align:right;
+	margin:0px 0px 0px 0px;
+	padding:10px 0px 0px 0px;
+}
+
+.celda2{
+	width:200px;
+	height:25px;
+	color:black;
+	text-align:left;
+	margin:0px 0px 0px 0px;
+	padding:0px 0px 0px 0px;
+}
+
+.celda3{
+	font-size:auto;
+	height:auto;
+	text-align:right;
+}
+
+.errores{
+	color: red;
+	width: auto;
+	font-weight: bold;
+	margin:0px 0px 0px 0px;
+	padding: 20px 0px 0px 0px;
+}
+
+/*FIN CUERPO LOGIN */
+
+/****************************************************************************************************************/
+/****************************************************************************************************************/
+
+#mision{
+	width:370px;
+	height:auto;
+	float:left;
+	overflow:auto;
+	margin:0px 0px 0px 0px;
+	padding:0px 15px 0px 15px;
+}
+
+#vision{
+	width:370px;
+	height:auto;
+	float:left;
+	overflow:auto;
+	margin:0px 0px 0px 0px;
+	padding:0px 15px 0px 15px;
+}
+
+
+/****************************************************************************************************************/
+/****************************************************************************************************************/
+
+
+/* INICIA CODIGO CORRESPONDIENTE AL CUERPO DEL SITIO */
+
+#contenido{
+	width: 800px;
+	height: auto;
+	padding: 20px 0px 0px 0px;
+	margin: 0px 0px 0px 0px;
+	overflow: auto;
+}
+
+.formulario{
+	width: 780px;
+	height: auto;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.titulo{
+	margin:0px 0px 0px 0px;
+	padding: 5px 0px 5px 0px;
+	background-color: blue; 
+	text-align: center;
+	color: white;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.caja1 {
+	width: 150px;
+	margin: 0px 0px 0px 0px;
+	padding: 5px 5px 5px 0px;
+	text-align: right;
+}
+
+.caja2 {
+	width: 280px;
+	margin: 0px 0px 0px 0px;
+	padding: 5px 0px 5px 0px;
+}
+
+.caja3 {
+	width: auto;
+	margin: 0px 0px 0px 0px;
+	padding: 5px 0px 5px 0px;
+}
+
+.caja4 {
+	width: 780px;
+	margin: 0px 0px 0px 0px;
+	padding: 5px 10px 5px 0px;
+	text-align: right; 
+}
+
+input[type=text], input[type=password]{
+	width: 245px;
+	padding: 5px 3px 5px 3px;
+}
+
+select{
+	width: 256px;
+	padding: 5px 3px 5px 3px;
+}
+
+input[type=submit]{
+	width: 150px;
+	padding: 5px 3px 5px 3px;
+}
+
+fieldset{
+	width: 780px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top:0px;
+	margin-bottom: 0px;
+	padding: 0px 0px 0px 0px;
+}
+
+/****************************************************************************************************************/
+/****************************************************************************************************************/
+
+#footer1{
+	width:800px;
+	height:86px;
+	padding:0px 0px 0px 0px;
+	margin:20px 0px 0px 0px;
+	background-image: url('../imagenes/copi.jpg');
+	float: left;
+}
+#footer2{
+	width:800px;
+	height:41px;
+	padding:0px 0px 0px 0px;
+	margin:0px 0px 0px 0px;
+	background-image: url('../imagenes/csjcivil_14.jpg');
+	float: left;
+}
+
+#footer11{
+	width:1330px;
+	height:86px;
+	padding:0px 0px 0px 0px;
+	margin:20px 0px 0px 0px;
+	background-image: url('../imagenes/copi.jpg');
+	background-repeat: no-repeat;
+	background-size:1330px 86px;
+}
+#footer22{
+	width:1330px;
+	height:41px;
+	padding:0px 0px 0px 0px;
+	margin:0px 0px 0px 0px;
+	background-image: url('../imagenes/csjcivil_14.jpg');
+	background-repeat: no-repeat;
+	background-size:1330px 41px;
+}
+
+
+
+
+
+
+
+
