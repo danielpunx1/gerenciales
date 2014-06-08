@@ -29,7 +29,7 @@ function solo_letras(evt)
 {
 	// NOTE: Backspace = 8, Enter = 13, '0' = 48, '9' = 57 ':'=58
 	var key = nav4 ? evt.which : evt.keyCode;
-	return ( (key >= 97 && key <= 122) || (key >= 65 && key <= 90) || key == 8 );
+	return ( (key >= 97 && key <= 122) || (key >= 65 && key <= 90) || key == 8 || key == 32 );
 }
 
 

@@ -87,13 +87,14 @@ function generar_grafico(formulario)
      </div>
       <form name="nuevo-usuario" action="" method="post">
        <div class="fila">
-         <div class="col4"><label>Camara</label>        <input type="text" name="camara" value=""></div>
-         <div class="col4"><label>Materia</label>       <input type="text" name="materia" value=""  /></div>
-         <div class="col4"><label>Tipo de juicio</label><input type="text" name="juicio" value="" onkeypress="return solo_letras(event)"/></div>
-       </div>
-       <div class="fila">
-         <div class="col4"><label>Fecha inicio</label>  <input type="text" name="fechai" id="fecha_i" value="" style="text-align:center;" onkeypress="return no_escribir(event)"></div>
-         <div class="col4"><label>Fecha fin</label>     <input type="text" name="fechaf" id="fecha_f" value="" style="text-align:center;" onkeypress="return no_escribir(event)"></div>
+         <div class="col3"><label>Primer dato</label><input type="text" name="1" value=""></div>
+         <div class="col3"><label>Calendario1</label><input type="text" name="inicios" value="" id="f_date_a" onkeypress="return no_escribir(event)" placeholder="Click para ingresar fecha"/></div>
+         <div class="col3"><label>Calendario2</label><input type="text" name="date" id="f_calcdate" /></div>
+         <div class="col3"><label>Primer dato</label><input type="text" name="1" value=""></div>
+         <div class="col3"><label>Primer dato</label><input type="text" name="1" value=""></div>
+         <div class="col3"><label>Primer dato</label><input type="text" name="1" value=""></div>
+         <div class="col3"><label>Primer dato</label><input type="text" name="1" value=""></div>
+         <div class="col3"><label>Primer dato</label><input type="text" name="1" value=""></div>
        </div>
        <div class="fila">
          <div class="push5"><input type="button" name="Generar" value="Generar" onclick="generar_grafico(this.form)" /></div>
@@ -106,12 +107,12 @@ function generar_grafico(formulario)
         var time = date.getTime()
     }
     Calendar.setup({
-        inputField     :    "fecha_i",   // id of the input field
+        inputField     :    "f_date_a",   // id of the input field
         ifFormat       :    "%Y-%m-%d",       // format of the input field
         onUpdate       :    catcalc
     });
     Calendar.setup({
-        inputField     :    "fecha_f",
+        inputField     :    "f_calcdate",
         ifFormat       :    "%Y-%m-%d",
         onUpdate       :    catcalc
     });

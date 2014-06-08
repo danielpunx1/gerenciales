@@ -60,17 +60,17 @@
           </tr>
           <tr>
             <td style="padding-left:80px;">
-              Expedientes en proceso por materia y estado de resolución
+              4. Expedientes en proceso por materia y estado de resolución
             </td>
           </tr>
           <tr>
             <td style="padding-left:80px;">
-              Reporte de casaciones por nueva normativa
+              5. Reporte de casaciones por nueva normativa
             </td>
           </tr>
           <tr>
             <td style="padding-left:80px;">
-              Reporte de colaboradores que asignaron un estado a un expediente
+              6. Reporte de colaboradores que asignaron un estado a un expediente
             </td>
           </tr>
           <tr>
@@ -104,7 +104,7 @@
             </td>
           </tr>
           <tr>
-            <td style="padding-left:0px;">
+            <td style="padding-left:80px;">
               5. 
             </td>
           </tr>
