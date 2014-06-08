@@ -50,10 +50,14 @@
 	left: 75%;
 }
 
+.margenes{
+	padding: 6px 25px 6px 25px;
+}
+
 .push1, .push2, .push3, .push4, .push5, .push6, .push7, .push8, .push9, .push10, .push11, .push12 {
 	/*position: relative;*/
 	float: right;
-	padding-right: 50px;
+	padding-right: 90px;
 	padding-top: 10px;
 }
 

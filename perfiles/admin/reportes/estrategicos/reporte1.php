@@ -22,9 +22,17 @@
 <script>
 function generar_grafico(formulario)
 {
-  var inicio = formulario.inicios;
-  inicio = inicio.value;
-  // fechaI = usuario.options[usuario.selectedIndex].value; //para calcular valor de select
+  var camaras = formulario.camara;
+  var materias = formulario.materia;
+  var juicios = formulario.juicio;
+  var fechainicial = formulario.fechai;
+  var fechafinal = formulario.fechaf;
+
+  camaras = camaras.options[camaras.selectedIndex].value;
+  materias = materias.options[materias.selectedIndex].value;
+  juicios = juicios.value;
+  fechainicial = fechainicial.value;
+  fechafinal = fechafinal.value;
 
   var xmlhttp;    
   // if ( inicio == "" )
@@ -49,7 +57,7 @@ function generar_grafico(formulario)
     }
   }
 
-  xmlhttp.open("GET","reporte1_grafico_ajax.php?inicio="+inicio,true); //un solo parametro
+  xmlhttp.open("GET","reporte1_grafico_ajax.php?camara="+camaras+"&materia="+materias+"&juicio="+juicios+"&fechai="+fechainicial+"&fechaf="+fechafinal,true); //un solo parametro
   // xmlhttp.open("GET","reporte1_grafico_ajax.php?inicio="+inicio+"&vari="+vari+"&otra="+otra,true); //varios parametros
   xmlhttp.send();
 }
@@ -87,8 +95,23 @@ function generar_grafico(formulario)
      </div>
       <form name="nuevo-usuario" action="" method="post">
        <div class="fila">
-         <div class="col4"><label>Camara</label>        <input type="text" name="camara" value=""></div>
-         <div class="col4"><label>Materia</label>       <input type="text" name="materia" value=""  /></div>
+         <div class="col4"><label>Camara &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <select name="camara">
+              <option value="C1">Camara1</option>
+              <option value="C2">Camara2</option>
+              <option value="C3">Camara3</option>
+              <option value="C4">Camara4</option>
+            </select>
+         </div>
+         <div class="col4"><label>Materia&nbsp;&nbsp;&nbsp;</label>
+            <select name="materia">
+              <option value="CAC">Civil</option>
+              <option value="CAF">Familia</option>
+              <option value="CAL">Laboral</option>
+              <option value="CAM">Mercantil</option>
+              <option value="___">Todas</option>
+            </select>
+         </div>
          <div class="col4"><label>Tipo de juicio</label><input type="text" name="juicio" value="" onkeypress="return solo_letras(event)"/></div>
        </div>
        <div class="fila">
@@ -96,7 +119,7 @@ function generar_grafico(formulario)
          <div class="col4"><label>Fecha fin</label>     <input type="text" name="fechaf" id="fecha_f" value="" style="text-align:center;" onkeypress="return no_escribir(event)"></div>
        </div>
        <div class="fila">
-         <div class="push5"><input type="button" name="Generar" value="Generar" onclick="generar_grafico(this.form)" /></div>
+         <div class="push5"><input class="margenes" type="button" name="Generar" value="Generar" onclick="generar_grafico(this.form)" /></div>
        </div>
      </form>
 
