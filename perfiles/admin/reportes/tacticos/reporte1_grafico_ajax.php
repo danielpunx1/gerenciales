@@ -9,27 +9,16 @@ $juicio = $_GET['juicio'];
 $fechai = $_GET['fechai'];
 $fechaf = $_GET['fechaf'];
 
-// echo $camara;
-// echo ' -- ';
-// echo $materia;
-// echo ' -- ';
-// echo $juicio;
-// echo ' -- ';
-// echo $fechai;
-// echo ' -- ';
-// echo $fechaf;
-
 
 $sql = "SELECT ex.codigo,ex.camara,CASE WHEN ex.codigo like '%-CAC-%' THEN 'Civil' WHEN ex.codigo like '%-CAL-%' THEN 'Laboral'
         WHEN ex.codigo like '%-CAF-%' THEN 'Familia' WHEN ex.codigo like '%-CAM-%' THEN 'Mercantil' END AS materia,ex.juicio 
         FROM expediente 
         WHERE ex.codigo LIKE '%-$materia-%' AND ex.juicio LIKE '%$juicio%' 
         AND ex.camara LIKE '%$camara%' AND ex.fecha BETWEEN '$fechai 00:00:00' AND '$fechaf 23:59:59' 
-        ORDER BY fecha ASC";
+        ORDER BY materia ASC, fecha ASC";
 
 
 ?>
-
 
 <table>
 	<tr>
