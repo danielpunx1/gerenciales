@@ -51,15 +51,11 @@
 
 <?php
 
-    //include "../../../../paginator/paginator.php";
-    //include "../../../../paginator/paginator_html3.php";
     include "../../../../config/db.php";
+    include "../laboraldays2.php";
     
-    $camara = $_REQUEST['camara'];
     $materia = $_REQUEST['materia'];
-    $juicio = $_REQUEST['juicio'];
-    $desde = $_REQUEST['desde'];
-    $hasta = $_REQUEST['hasta'];
+    $colaborador = $_REQUEST['colaborador'];
     
     //para mostrar la fecha y hora
     date_default_timezone_set("America/El_Salvador");
@@ -95,7 +91,7 @@
             
         <table class='tablaR'>
             <tr>
-                <td class='tituloR'> Consulta de Tipos de Juicios por C&aacute;mara</td>
+                <td class='tituloR'> Consulta de expedientes en periodo de expiraci&oacute;n Nueva Normativa </td>
             </tr>
         </table>
         <div id='contenido3R'></div>
@@ -107,12 +103,12 @@
                         <td>
                             <table class="datosReporte">
                                 <tbody>
-                                    <tr>
+                                   <tr>
                                         <td>
-                                            Período:
+                                            Codigo :
                                         </td>
                                         <td>
-                                            <?php echo $desde.' al '.$hasta; ?>
+                                            Nueva Normativa
                                         </td>
                                     </tr>
                                     <tr>
@@ -131,18 +127,10 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            Cámara:
+                                            Colaborador:
                                         </td>
                                         <td>
-                                            <?php if($camara=="%"){echo "Todas las C&aacute;maras";}else{echo $camara;} ?>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Tipo de Juicio:
-                                        </td>
-                                        <td>
-                                            <?php if($juicio=='%'){echo 'Todos los juicios';}else{echo $juicio;} ?>
+                                            <?php if($colaborador=='%'){echo 'Todos los colaboradores';}else{echo $colaborador;} ?>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -154,20 +142,20 @@
             
             <table class="tablaR">
                     <tr>
-                        <td class="cabeza_tabla" style="width: 10%;">
+                        <td class="cabeza_tabla" style="width: 20%;">
                             Código
                         </td>
                         <td class="cabeza_tabla" style="width: 20%;">
-                            Cámara
+                            Colaborador
                         </td>
                         <td class="cabeza_tabla" style="width: 20%;">
                             Materia
                         </td>
-                        <td class="cabeza_tabla" style="width: 35%;">
-                            Juicio
+                        <td class="cabeza_tabla" style="width: 10%;">
+                            Vencimiento
                         </td>
-                        <td class="cabeza_tabla" style="width: 15%;">
-                            Fecha de Creación
+                        <td class="cabeza_tabla" style="width: 30%;">
+                            Tiempo retenido
                         </td>
                     </tr>
             </table>
@@ -176,8 +164,16 @@
                 
                 <?php
                     
-                    $sql = "SELECT ex.codigo,ex.camara,CASE WHEN ex.codigo like '%-CAC-%' THEN 'Civil' WHEN ex.codigo like '%-CAL-%' THEN 'Laboral' WHEN ex.codigo like '%-CAF-%' THEN 'Familia' WHEN ex.codigo like '%-CAM-%' THEN 'Mercantil' END AS materia,ex.juicio, DATE_TRUNC('second', ex.fecha) AS fecha FROM expediente ex WHERE ex.codigo LIKE '$materia' AND ex.juicio LIKE '%$juicio%' AND ex.camara LIKE '%$camara%' AND ex.fecha BETWEEN '$desde 00:00:00' AND '$hasta 23:59:59' ORDER BY materia ASC, fecha ASC";
-                    
+                    $sql = "SELECT e.codigo, u.nombres || ' ' || u.apellidos as nombre,
+                            CASE WHEN e.codigo like '%-CAC-%' THEN 'Civil' WHEN e.codigo like '%-CAL-%' THEN 'Laboral'
+                            WHEN e.codigo like '%-CAF-%' THEN 'Familia' WHEN e.codigo like '%-CAM-%' THEN 'Mercantil' END AS materia,
+                            e.fecha, now() as hoy 
+                            from expediente e 
+                            inner join ruta ru on ru.codigo=e.codigo
+                            inner join usuario u on u.login=ru.manda 
+                            where ru.manda !='archivo' and e.codigo like '$materia' and u.codigo_col like '$colaborador'
+                            and e.nuevo_codigo IS true and ru.fechae is null order by nombre";
+                                                
                      $resultado = pg_query($sql) or die ('consulta fallida:'.pg_last_error());
         
                     $filas = pg_num_rows($resultado);
@@ -201,19 +197,41 @@
                                 }
                             
                                 $codigo1 = $_expedientes["codigo"];
-                                $camara1 = $_expedientes["camara"];
+                                $colaborador1 = $_expedientes["nombre"];
                                 $materia1 = $_expedientes["materia"];
-                                $juicio1 = $_expedientes["juicio"];
-                                $fecha1  = $_expedientes["fecha"];
-                           
+                                
+                                $fechar  = $_expedientes["fecha"];
+                                $fechae  = $_expedientes["hoy"];
+                                $dif=lab($fechar, $fechae, '2014-01-01 00:00:00');
+                                $dias=labd($fechar, $fechae, '2014-01-01 00:00:00');
+                                
+                                
+                                if( $dias < 10 )
+                                {
+                                    $estilos= 'src="../../../../imagenes/verde.png"';
+                                }
+                                
+                                if( $dias > 9 and $dias < 20 )
+                                {
+                                    $estilos= 'src="../../../../imagenes/amarillo.png"';
+                                }
+                                
+                                if( $dias > 19 and $dias < 31 )
+                                {
+                                    $estilos= 'src="../../../../imagenes/rojo.png"';
+                                }
+                                
+                                
+                                
+                                
                             ?>
                             
                                 <tr class="<?php echo $clase; ?>">
-                                    <td style="width: 10%;"><?php echo $codigo1; ?></a></td>
-                                    <td style="width: 20%;"><?php echo $camara1; ?></td>
-                                    <td style="width: 20%;"><?php echo $materia1; ?></td>
-                                    <td style="width: 35%;"><?php echo $juicio1; ?></td>
-                                    <td style="width: 15%;"><?php echo $fecha1; ?></td>
+                                    <td style="width: 20%;"><?php echo $codigo1; ?></a></td>
+                                    <td style="width: 20%;"><?php echo $colaborador1; ?></td>
+                                    <td style="width: 20%;"><?php echo $materia1; ?></td>                                    
+                                    <td style="width: 10%;text-align:center;"><img <?php echo $estilos; ?> > </td>
+                                    <td style="width: 30%;"><?php echo $dif; ?></td>
                                 </tr>
                             
 
@@ -229,11 +247,11 @@
                         echo "
                         <script type=\"text/javascript\">
                         function imprimir() {
-                            window.location.assign(\"reporte1A_imprimir.php?materia=$materia&camara=$camara&juicio=$juicio&desde=$desde&hasta=$hasta\");
+                            window.location.assign(\"reporte3A_imprimir.php?materia=$materia&colaborador=$colaborador\");
                         }
                         
                         function exportar() {
-                            window.location.assign(\"reporte1A_excel.php?materia=$materia&camara=$camara&juicio=$juicio&desde=$desde&hasta=$hasta\");
+                            window.location.assign(\"reporte3A_excel.php?materia=$materia&colaborador=$colaborador\");
                         }
                         
                         </script>

@@ -1,4 +1,5 @@
 ﻿
+
 body {
 font-weight: normal;
 font-style: normal;
@@ -358,7 +359,7 @@ fieldset{
     border-radius: 15px 15px 15px 15px;
 }
 
-.cabecera_R {
+.cabecera_ {
     font-family: Helvetica,Arial,sans-serif;
     width: 100%;
     background-color: #F0F1F5;
@@ -379,6 +380,13 @@ fieldset{
     border-image: none;
     margin: 0px;
     padding: 5px;
+}
+
+.cabecera_reporte {
+    width: 90%;
+    margin: 10px auto;
+    background-color: #FFFFFF;
+    border: none;
 }
 
 #tresultados div {
@@ -508,7 +516,7 @@ input[type="button"], button, input[type="reset"], input[type="submit"] {
     border: 1px outset #3895CC;
     background-color: #056299;
     height: 22px;
-    font-size: 13px;
+    font-size: 11px;
     font-style: normal;
     font-weight: bold;
     letter-spacing: normal;
@@ -587,4 +595,85 @@ td.cabeza_tabla {
 
 tr.resultados:hover, tr.resultados_i:hover {
     background-color: #EFE0C2;
+}
+
+
+.resultadosRep {
+    margin: 10px auto;
+    width: 100%;
+    empty-cells: show;
+    border-spacing: 0px;
+    border-collapse: collapse;
+    background-color: #FFFFFF;
+    font-size: 12px;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+.resultadosRep thead th, .resultadosRep tfoot td {
+    padding: 3px;
+    font-weight: bold;
+    text-align: left;
+    border: 1px solid #000000;
+    background-color: #D3D3D3;
+}
+
+.tituloReporte, .resultadosRep tfoot td {
+    text-align: center !important;
+}
+
+.resultadosRep tbody td {
+    padding: 2px;
+    border: 1px solid #000000;
+}
+
+.sinResultados {
+    height: 50px;
+    font-size: 14px;
+}
+
+
+
+/* ****************************************************************************************** */
+/* ****************************************************************************************** */
+
+/* PAGINADOR */
+
+ .holder, #legend2 {
+    margin:15px 0;
+    padding: 3px;
+    text-align:center;
+    border-spacing: 0px;
+    border-left: 3px solid #7F9DB9;
+    border-right: 3px solid #7F9DB9;
+    background-color: #F0F1F5;
+}
+.holder a {
+    font-size:12px;
+    cursor:pointer;
+    margin:0 5px;
+    color:#333;
+}
+.holder a:hover {
+    background-color:#222;
+    color:#fff;
+}
+.holder a.jp-previous {
+    margin-right:15px;
+}
+.holder a.jp-next {
+    margin-left:15px;
+}
+.holder a.jp-current,a.jp-current:hover {
+    color:#FF4242;
+    font-weight:bold;
+}
+.holder a.jp-disabled,a.jp-disabled:hover {
+    color:#bbb;
+}
+.holder a.jp-current,a.jp-current:hover,.holder a.jp-disabled,a.jp-disabled:hover {
+    cursor:default;
+    background:none;
+}
+.holder span {
+    margin: 0 5px;
 }

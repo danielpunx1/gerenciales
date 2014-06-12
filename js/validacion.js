@@ -33,6 +33,16 @@ function solo_letras(evt)
 }
 
 
+//PERMITE INGRESAR SOLO LETRAS y % para los juicios
+
+function solo_letras_juicios(evt)
+{
+    // NOTE: Backspace = 8, Enter = 13, '0' = 48, '9' = 57 ':'=58
+    var key = nav4 ? evt.which : evt.keyCode;
+    return ( (key >= 97 && key <= 122) || (key >= 65 && key <= 90) || key == 8 || key == 32 || key == 37 );
+}
+
+
 //********************************************************************************************
 //********************************************************************************************
 
@@ -58,5 +68,45 @@ function validar_login(form){
 	{	alert("Por favor, Ingrese su clave de usuario"); form.pass.focus(); return false; }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//********************************************************************************************//********************************************************************************************//********************************************************************************************//********************************************************************************************
+
+// REPORTES REṔORTES REPORTES REPORTES REPORTES
+
+
+function validar_reporte1(form){
+
+    if( form.materia.value == "" )
+    {   alert("Por favor, Seleccione una materia"); form.materia.focus(); return false; }
+    
+    if( form.camara.value == "" )
+    {   alert("Por favor, Seleccione una camara"); form.camara.focus(); return false; }
+    
+    if( form.juicio.value == "" )
+    {   alert("Por favor, Ingrese el simbolo % para todos los juicios o ingrese un tipo de juicio especifico"); form.juicio.focus(); return false; }
+    
+    if( form.desde.value == "" )
+    {   alert("Por favor, Ingrese una fecha de inicio para la busqueda"); form.desde.focus(); return false; }
+
+    if( form.hasta.value == "" )
+    {   alert("Por favor, Ingrese una fecha final para la busqueda"); form.hasta.focus(); return false; }
+    
+}
 
 

@@ -51,13 +51,12 @@
 
 <?php
 
-    //include "../../../../paginator/paginator.php";
-    //include "../../../../paginator/paginator_html3.php";
     include "../../../../config/db.php";
+    include "../laboraldays2.php";
     
     $camara = $_REQUEST['camara'];
     $materia = $_REQUEST['materia'];
-    $juicio = $_REQUEST['juicio'];
+    $colaborador = $_REQUEST['colaborador'];
     $desde = $_REQUEST['desde'];
     $hasta = $_REQUEST['hasta'];
     
@@ -95,7 +94,7 @@
             
         <table class='tablaR'>
             <tr>
-                <td class='tituloR'> Consulta de Tipos de Juicios por C&aacute;mara</td>
+                <td class='tituloR'> Reporte de estados de resoluci&oacute;n por casaci&oacute;n</td>
             </tr>
         </table>
         <div id='contenido3R'></div>
@@ -139,10 +138,10 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            Tipo de Juicio:
+                                            Colaborador:
                                         </td>
                                         <td>
-                                            <?php if($juicio=='%'){echo 'Todos los juicios';}else{echo $juicio;} ?>
+                                            <?php if($colaborador=='%'){echo 'Todos los colaboradores';}else{echo $colaborador;} ?>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -158,16 +157,19 @@
                             Código
                         </td>
                         <td class="cabeza_tabla" style="width: 20%;">
+                            Colaborador
+                        </td>
+                        <td class="cabeza_tabla" style="width: 20%;">
                             Cámara
                         </td>
                         <td class="cabeza_tabla" style="width: 20%;">
                             Materia
                         </td>
-                        <td class="cabeza_tabla" style="width: 35%;">
-                            Juicio
+                        <td class="cabeza_tabla" style="width: 15%;">
+                            Estado resoluci&oacute;n
                         </td>
                         <td class="cabeza_tabla" style="width: 15%;">
-                            Fecha de Creación
+                            Tiempo retenido
                         </td>
                     </tr>
             </table>
@@ -176,7 +178,17 @@
                 
                 <?php
                     
-                    $sql = "SELECT ex.codigo,ex.camara,CASE WHEN ex.codigo like '%-CAC-%' THEN 'Civil' WHEN ex.codigo like '%-CAL-%' THEN 'Laboral' WHEN ex.codigo like '%-CAF-%' THEN 'Familia' WHEN ex.codigo like '%-CAM-%' THEN 'Mercantil' END AS materia,ex.juicio, DATE_TRUNC('second', ex.fecha) AS fecha FROM expediente ex WHERE ex.codigo LIKE '$materia' AND ex.juicio LIKE '%$juicio%' AND ex.camara LIKE '%$camara%' AND ex.fecha BETWEEN '$desde 00:00:00' AND '$hasta 23:59:59' ORDER BY materia ASC, fecha ASC";
+                    $sql = "SELECT e.codigo,u.nombres || ' ' || u.apellidos as nombre,e.camara,
+    CASE WHEN e.codigo like '%-CAC-%' THEN 'Civil' WHEN e.codigo like '%-CAL-%' THEN 'Laboral'
+    WHEN e.codigo like '%-CAF-%' THEN 'Familia' WHEN e.codigo like '%-CAM-%' THEN 'Mercantil' END AS materia
+    ,est.estado,r.fechar, r.fechae
+    from expediente e, 
+    ruta r, usuario u, estado_expediente es, estados est 
+    where u.login=r.manda 
+    AND r.codigo=e.codigo and r.codigo like '%-____' AND u.codigo_col like '$colaborador' and u.codigo_col != 'AA'
+    AND est.id_estado=es.estado_juridico AND es.codigo=e.codigo AND  fechae =(SELECT max(fechae) FROM ruta WHERE codigo=e.codigo)
+    AND e.camara LIKE '$camara' AND e.codigo like '$materia'
+    AND fechar BETWEEN '$desde 00:00:00' AND '$hasta 23:59:59' order by split_part(e.codigo,'-', 3) DESC, nombre,materia,camara";
                     
                      $resultado = pg_query($sql) or die ('consulta fallida:'.pg_last_error());
         
@@ -201,19 +213,24 @@
                                 }
                             
                                 $codigo1 = $_expedientes["codigo"];
-                                $camara1 = $_expedientes["camara"];
+                                $colaborador1 = $_expedientes["nombre"];
                                 $materia1 = $_expedientes["materia"];
-                                $juicio1 = $_expedientes["juicio"];
-                                $fecha1  = $_expedientes["fecha"];
+                                $camara1 = $_expedientes["camara"];
+                                $estado1 = $_expedientes["estado"];
+                                
+                                $fechae  = $_expedientes["fechae"];
+                                $fechar  = $_expedientes["fechar"];
+                                $dif=lab($fechar, $fechae, '2014-01-01 00:00:00');
                            
                             ?>
                             
                                 <tr class="<?php echo $clase; ?>">
                                     <td style="width: 10%;"><?php echo $codigo1; ?></a></td>
-                                    <td style="width: 20%;"><?php echo $camara1; ?></td>
+                                    <td style="width: 20%;"><?php echo $colaborador1; ?></td>
                                     <td style="width: 20%;"><?php echo $materia1; ?></td>
-                                    <td style="width: 35%;"><?php echo $juicio1; ?></td>
-                                    <td style="width: 15%;"><?php echo $fecha1; ?></td>
+                                    <td style="width: 20%;"><?php echo $camara1; ?></td>                                    
+                                    <td style="width: 15%;"><?php echo $estado1; ?></td>
+                                    <td style="width: 15%;"><?php echo $dif; ?></td>
                                 </tr>
                             
 
@@ -229,11 +246,11 @@
                         echo "
                         <script type=\"text/javascript\">
                         function imprimir() {
-                            window.location.assign(\"reporte1A_imprimir.php?materia=$materia&camara=$camara&juicio=$juicio&desde=$desde&hasta=$hasta\");
+                            window.location.assign(\"reporte2A_imprimir.php?materia=$materia&camara=$camara&colaborador=$colaborador&desde=$desde&hasta=$hasta\");
                         }
                         
                         function exportar() {
-                            window.location.assign(\"reporte1A_excel.php?materia=$materia&camara=$camara&juicio=$juicio&desde=$desde&hasta=$hasta\");
+                            window.location.assign(\"reporte2A_excel.php?materia=$materia&camara=$camara&colaborador=$colaborador&desde=$desde&hasta=$hasta\");
                         }
                         
                         </script>

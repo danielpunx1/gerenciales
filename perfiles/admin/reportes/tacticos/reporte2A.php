@@ -24,6 +24,9 @@
 <body style="font-size: 12px;font-family: Helvetica,Arial,sans-serif;color: #000;">
 
 <?php
+    
+    include "../../../../config/db.php";
+    
     //para mostrar la fecha y hora
     date_default_timezone_set("America/El_Salvador");
     $dias= array("Domingo","Lunes","Martes","Mi&eacute;rcoles","Jueves","Viernes","S&aacute;bado");
@@ -54,11 +57,11 @@
         </tr>
     </table>
     
-    <form name="form" id="expediente" action="reporte1A_grafico.php" method="POST" onsubmit="return validar_reporte1(this)">
+    <form name="form" id="expediente" action="reporte2A_grafico.php" method="POST" onsubmit="return validar_reporte1(this)">
             
         <table class='tablaR'>
             <tr>
-                <td class='tituloR'> Consulta de tipos de juicios por c&aacute;mara </td>
+                <td class='tituloR'> Reporte de estados de resoluci&oacute;n por casaci&oacute;n </td>
             </tr>
         </table>
         <div id='contenido3R'></div>
@@ -66,6 +69,31 @@
             <div id='tresultados'>
             
             <table class='tablam tablaFrmEst'>
+                <tr>
+                    <td>Colaborador:</td>
+                    <td>
+                        <select name="colaborador">
+                            <OPTGROUP label="----------------------------------------------------">
+                            <option value="">Seleccione un colaborador</option>
+                            </OPTGROUP>
+                            <OPTGROUP label="----------------------------------------------------">
+                            <option value="%">Todos los colaboradores</option>
+                            </OPTGROUP>
+                            <OPTGROUP label="----------------------------------------------------">
+                            <?php
+                                
+                                $sql = "select nombres,apellidos,codigo_col from usuario";
+                                $res = pg_query($conn,$sql);
+
+                                while ($filas = pg_fetch_array($res) )
+                                {
+                                echo '<option value="'.$filas['codigo_col'].'">'.$filas['nombres'].' '.$filas['apellidos'].'</option>';
+                                }
+                            ?>
+                            </OPTGROUP>
+                        </select>
+                    </td>
+                </tr>
                 <tr>
                     <td>Materia:</td>
                     <td>
@@ -125,13 +153,6 @@
                     </SELECT><br />
                     </td>
                 </tr>
-                <tr>
-                    <td>Tipo de juicio:</td>
-                    <td>
-                        <input type="text" NAME="juicio" maxlength="60" value="" onkeypress="return solo_letras_juicios(event)" style="width: 250;" placeholder="Ingrese % para todos los juicios" />
-                    </td>
-                </tr>
-                <tr>
                     <td>Desde:</td>
                     <td>
                         <input type="text" NAME="desde" id="desde" maxlength="10" value="" readonly style="width: 250;" title="Fecha de inicio para la busqueda"/>
